@@ -1,20 +1,28 @@
-from flask import Blueprint, render_template,request, redirect, url_for
+from flask import Blueprint,request,  jsonify
 from myapp.initiDb import db
 from myapp.models import bar
-from initCrypto import fernet
+from myapp.initCrypto import fernet
 
-verifyBar = Blueprint("verifyBar", __name__)
+inputBar = Blueprint("inputBar", __name__)
 
-@verifyBar.route("/inputBar", methods=["GET", "POST"])
-@verifyBar.route("/inputBar/<msg>", methods=["GET", "POST"])
-def verify_bar(msg=""):
-    if request.method == "POST":
-        endereco = request.form["endereco"]
-        status = request.form["status"]
-        reputacao = request.form["reputacao"]
-        if endereco and status and reputacao:
-            NovoBar = bar(endereco=fernet.encrypt(endereco), status=fernet.encrypt(status), reputacao=fernet.encrypt(reputacao))
-            return redirect(url_for("verifyBar", msg = "insert concluido"))
-        else:
-            return redirect(url_for("verifyBar", msg = "Preencha todos os campos"))
-    return render_template("BarForm.html", msg=msg)
+@inputBar.route("/inputBar", methods=["POST"])
+def insert_bar():
+    nome=request.form.get("nome")
+    endereco = request.form.get("endereco")
+    status =  request.form.get("condicao")
+    reputacao =  request.form.get("reputacao")
+
+    if not (endereco and status and reputacao):
+        return jsonify("preencha todos os campos"), 400
+
+
+    NovoBar = bar(
+        nome=nome,
+        endereco=fernet.encrypt(endereco.encode()),
+        condicao=fernet.encrypt(status.encode()),
+        reputacao=fernet.encrypt(reputacao.encode())
+    )
+    db.session.add(NovoBar)
+    db.session.commit()
+
+    return jsonify("bar adicionado com sucesso"), 200

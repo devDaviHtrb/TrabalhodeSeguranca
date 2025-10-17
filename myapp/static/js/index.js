@@ -1,5 +1,5 @@
 function queryBar() {
-  const endereco = document.getElementById("enderecoInput").value.trim();
+  const endereco = document.getElementById("NomeInput").value.trim();
   const msgLabel = document.getElementById("msg");
   if (!endereco) {
     msgLabel.innerText = "Coloque o endereço";
@@ -23,14 +23,15 @@ function queryBar() {
         resultado.innerHTML = `
           <h3>Resultado da Consulta:</h3>
           <div>
-            <p><strong>Reputação:</strong> ${data.reputacao}</p>
-            <p><strong>Endereço:</strong> ${data.endereco}</p>
-            <p><strong>Status:</strong> ${data.condicao}</p>
+            <p> Nome: ${data.nome}</p>
+            <p>Reputação: ${data.reputacao}</p>
+            <p>Endereço: ${data.endereco}</p>
+            <p>Status: ${data.status}</p>
           </div>`;
         if (data.reputacao > 3) {
           resultado.innerHTML += `<p> Recomendado</p>`;
         } else {
-          resultado.innerHTML = `<p>Não Recomendado</p>`;
+          resultado.innerHTML += `<p>Não Recomendado</p>`;
         }
       } else {
         resultado.innerHTML = "<p>Nenhum bar encontrado.</p>";

@@ -14,9 +14,12 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 
 app.register_blueprint(home)
 app.register_blueprint(verifyBar)
+app.register_blueprint(inputBar)
+app.register_blueprint(insertPage)
 
 db.init_app(app)
-db.create_all()
+with app.app_context():
+    db.create_all()
 
 if __name__ == "__main__":
     app.run(debug=True)

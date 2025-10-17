@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inserir Bares</title>
+     <link rel="stylesheet" href="{{url_for('static', filename='style/insert.css')}}">
+</head>
+<body>
+    <div class="container">
+        <h1>Inserir Novo Bar</h1>
+        <label for="NomeInput">Nome:</label>
+        <input type="text" id="NomeInput" placeholder="Nome do bar">
+        <label for="reputacaoInput">Reputação (ex: 4.5):</label>
+        <input type="number" id="reputacaoInput" placeholder="Nota de 0 a 5">
+        
+        <label for="enderecoInput">Endereço:</label>
+        <input type="text" id="enderecoInput" placeholder="Ex: 123 Main Street">
+        
+        <label for="condicaoInput">Condição</label>
+        <select id="condicaoInput">
+            <option value="aberto">Aberto</option>
+            <option value="fechado">Fechado</option>
+        </select>
+        
+        <button onclick="insertBar()">Inserir Bar</button>
+        
+        <div id="msg"></div>
+
+         <script src="{{url_for('static', filename='js/insert.js')}}"></script>
+    </div>
+</body>
+</html>

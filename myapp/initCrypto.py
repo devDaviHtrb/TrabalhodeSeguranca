@@ -1,5 +1,5 @@
 from cryptography.fernet import Fernet
 
-# 1. Gerar a chave (faça isso apenas uma vez e armazene-a com segurança!)
-chave = "chave"
+chave =b'RiZvxHdPeUQClZ7qKH0Tr7GQTZUFKQ6YhPZwKOswaTs='
+
 fernet = Fernet(chave)
