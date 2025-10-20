@@ -1,11 +1,10 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 import os
 from myapp.initiDb import db
 from myapp.models import *
-
 from myapp.routes import *
+
 load_dotenv()
 
 app = Flask(__name__, template_folder="myapp/templates", static_folder="myapp/static")
